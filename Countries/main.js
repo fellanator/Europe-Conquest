@@ -705,7 +705,7 @@ fillCities(countriesList[imageSelector], targetCities);
 {
     targetCities.innerHTML = '';
     const choice = document.createElement('option'); 
-    choice.textContent = 'No enemy cities present.';
+    choice.textContent = 'No locations present.';
     targetCities.appendChild(choice);
     
 }
@@ -730,7 +730,7 @@ fillCities(countriesList[imageSelector], targetCities);
 {
     targetCities.innerHTML = '';
     const choice = document.createElement('option'); 
-    choice.textContent = 'No enemy cities present.';
+    choice.textContent = 'No locations present.';
     targetCities.appendChild(choice);
 }
 
@@ -763,7 +763,7 @@ fillCities(countriesList[imageSelector], targetCities);
 {
     targetCities.innerHTML = '';
     const choice = document.createElement('option'); 
-    choice.textContent = 'No enemy cities present.';
+    choice.textContent = 'No locations present.';
     targetCities.appendChild(choice);
 }
 
@@ -792,7 +792,7 @@ if(selectionList.length == 0)
 {
     targetCities.innerHTML = '';
     const choice = document.createElement('option'); 
-    choice.textContent = 'No enemy cities present.';
+    choice.textContent = 'No locations present.';
     targetCities.appendChild(choice);  
     
 }
@@ -802,7 +802,7 @@ if(selectionList.length == 0)
 document.getElementById('sendTroops').addEventListener('click', () =>{
 
 
-    if(targetCities.value != 'No enemy cities present.')
+    if(targetCities.value != 'No locations present.')
     {
         let yourCityAttacker;
         let enemyCityAttacker;
@@ -830,7 +830,7 @@ document.getElementById('sendTroops').addEventListener('click', () =>{
         
         landDetermine(yourCityAttacker.Population/10, baseCountry.Land, enemyCityAttacker.Population/10, countriesList[imageSelector].Land, yourCityAttacker, enemyCityAttacker);
 
-        console.log('does this happen immediately?');
+       
     }
     if(targetCities.length - 1 == 0 && !countriesList[imageSelector].Taken)
     {
@@ -875,10 +875,10 @@ dropdownToAdd.appendChild(choice);
 if(dropdownToTake.length == 0)
 {
    
-    targetCities.innerHTML = '';
+    dropdownToTake.innerHTML = '';
     const choice = document.createElement('option'); 
-    choice.textContent = 'No enemy cities present.';
-    targetCities.appendChild(choice);  
+    choice.textContent = 'No locations present.';
+    dropdownToTake.appendChild(choice);  
 }
 }
 
@@ -928,7 +928,7 @@ console.log(population + " Size");
 console.log(enemyPopulation + " enemySize");
 console.log(randomKills/2 + " kills");
 console.log(randomEnemyKills/2 + " deaths");
-//FIX FIX FIX THIS THE MILITARY IS TEN PERCENT OF THE POPULATION AND THESE VALUES SHOULD REFLECT THAT FIX THESE NOOOWWWW
+
    if(population <= 0 || enemyPopulation <= 0)
    {
        clearInterval(battle);
@@ -943,14 +943,14 @@ console.log(randomEnemyKills/2 + " deaths");
            if(country.Stats.Cities[city].Name.toLowerCase() == self.Name.toLowerCase())
            {
             
-            country.Stats.Cities[city].Population = population;
+           country.Stats.Cities[city].Population -= (fullPop - population);
             country.Stats.Population -= (fullPop - population);
             
            }
            if(country.Stats.Cities[city].Name.toLowerCase() == foe.Name.toLowerCase())
             {
                
-             country.Stats.Cities[city].Population -= (enemyFullPop - enemyPopulation);
+             country.Stats.Cities[city].Population -= enemyFullPop;
              country.Stats.Population -= enemyFullPop;
             
             }
@@ -972,12 +972,12 @@ console.log(randomEnemyKills/2 + " deaths");
 
            if(country.Stats.Cities[city].Name.toLowerCase() == foe.Name.toLowerCase())
            {
-            country.Stats.Cities[city].Population = enemyPopulation;
+            country.Stats.Cities[city].Population -= (enemyFullPop - enemyPopulation);
             country.Stats.Population -= (enemyFullPop - enemyPopulation);
            }
            if(country.Stats.Cities[city].Name.toLowerCase() == self.Name.toLowerCase())
             {  
-             country.Stats.Cities[city].Population = 0;
+             country.Stats.Cities[city].Population -= fullPop;
              country.Stats.Population -= fullPop;
             }
             
